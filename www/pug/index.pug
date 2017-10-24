@@ -21,134 +21,107 @@ html
       #header-wrapper
         #header.container
           // Logo
-          h1#logo
+          #logo
             a(href='index.html') デジゲー博2017
           // Nav
           nav#nav
             ul
               li
-                a(href='') Left Sidebar
+                a(href="#introduction") 頒布作品紹介
               li.break
-                a(href='') Right Sidebar
+                a(href="#participation") 参加概要
         // Hero
         section#hero.container
           header
             h2 デジゲー博2017
-          p デジクリは、2017/11/12に開催されるデジゲー博2017に参加します。
+          p 芝浦工業大学デジクリは，2017年11月12日に行われるデジゲー博2017に参加します。
+          ul.action
+            li
+              a.button(href="http://digigame-expo.org/",target="_blank")
+                | デジゲー博2017公式サイト
       // Features 1
-      .wrapper
+      .wrapper#introduction
+        section.container
+          header
+            h1.title 頒布作品紹介
+        section.container
+          header
+            h2 デジクリゲームアンソロジー
+            p デジクリのメンバーが作った個性豊かな四本の作品を収録したアンソロジーです．
+          ul.default
+            li 頒布価格：500円
+            li 収録作品
+              ul.default 
+                li Sonant Storm : Robberun
+                li WizPizza Co. : Fly Wiz Pizza
+                li Ulueh : YouAretheBall ～トランセンデンス
+                li こがれ : ひかり
         .container
           .row
-            section.feature(class='12u(narrower) 6u')
-              .image-wrapper.first
-                a.image.featured.first(href='#')
-                  img(src='images/pic01.jpg', alt='')
-              header
-                h2
-                  | Semper magna neque vel
-                  br
-                  | 									adipiscing curabitur
-              p
-                | Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur vel
-                | sem sit dolor neque semper magna. Lorem ipsum dolor sit amet consectetur et sed
-                | adipiscing elit. Curabitur vel sem sit.
-              ul.actions
-                li
-                  a.button(href='#') Elevate my awareness
-            section.feature(class='12u(narrower) 6u')
-              .image-wrapper
-                a.image.featured(href='#')
-                  img(src='images/pic02.jpg', alt='')
-              header
-                h2
-                  | Amet lorem ipsum dolor
-                  br
-                  | 									sit consequat magna
-              p
-                | Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur vel
-                | sem sit dolor neque semper magna. Lorem ipsum dolor sit amet consectetur et sed
-                | adipiscing elit. Curabitur vel sem sit.
-              ul.actions
-                li
-                  a.button(href='#') Elevate my awareness
+            each game in data.games.slice(0,2)
+              section(class='12u(narrower) 6u')
+                .image-wrapper.first
+                  a.image.featured.first(href='#')
+                    iframe(src!=game.movie,width="100%",height="300px" allowfullscreen)
+                header.feature
+                  h2
+                    != game.title
+                p
+                  != game.description
+                ul.default
+                  li
+                    | ジャンル：
+                    != game.genre
+                  li
+                    | 制作チーム：
+                    != game.team
+                  if game.author
+                    li
+                      | 製作者：
+                      != game.author
+                
           .row
-            section.feature(class='12u(narrower) 6u')
-              .image-wrapper.first
-                a.image.featured.first(href='#')
-                  img(src='images/pic01.jpg', alt='')
-              header
-                h2
-                  | Semper magna neque vel
-                  br
-                  | 									adipiscing curabitur
-              p
-                | Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur vel
-                | sem sit dolor neque semper magna. Lorem ipsum dolor sit amet consectetur et sed
-                | adipiscing elit. Curabitur vel sem sit.
-              ul.actions
-                li
-                  a.button(href='#') Elevate my awareness
-            section.feature(class='12u(narrower) 6u')
-              .image-wrapper
-                a.image.featured(href='#')
-                  img(src='images/pic02.jpg', alt='')
-              header
-                h2
-                  | Amet lorem ipsum dolor
-                  br
-                  | 									sit consequat magna
-              p
-                | Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur vel
-                | sem sit dolor neque semper magna. Lorem ipsum dolor sit amet consectetur et sed
-                | adipiscing elit. Curabitur vel sem sit.
-              ul.actions
-                li
-                  a.button(href='#') Elevate my awareness
-      // Promo
-      #promo-wrapper
-        section#promo
-          h2 Neque semper magna et lorem ipsum adipiscing
-          a.button(href='#') Breach the thresholds
+            each game in data.games.slice(2,4)
+                section(class='12u(narrower) 6u')
+                  .image-wrapper.first
+                    a.image.featured.first(href='#')
+                      iframe(src!=game.movie,width="100%",height="300px" allowfullscreen)
+                  header.feature
+                    h2
+                      != game.title
+                  p
+                    != game.description
+                  ul.default
+                    li
+                      | ジャンル：
+                      != game.genre
+                    li
+                      | 制作チーム：
+                      != game.team
       // Features 2
-      .wrapper
+      .wrapper#participation
         section.container
-          header.major
-            h2 Sed magna consequat lorem curabitur tempus
-            p Elit aliquam vulputate egestas euismod nunc semper vehicula lorem blandit
-          .row.features
-            section.feature(class='12u(narrower) 4u')
-              .image-wrapper.first
-                a.image.featured(href='#')
-                  img(src='images/pic03.jpg', alt='')
-              p
-                | Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
-                | vel sem sit dolor neque semper magna lorem ipsum.
-            section.feature(class='12u(narrower) 4u')
-              .image-wrapper
-                a.image.featured(href='#')
-                  img(src='images/pic04.jpg', alt='')
-              p
-                | Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
-                | vel sem sit dolor neque semper magna lorem ipsum.
-            section.feature(class='12u(narrower) 4u')
-              .image-wrapper
-                a.image.featured(href='#')
-                  img(src='images/pic05.jpg', alt='')
-              p
-                | Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur
-                | vel sem sit dolor neque semper magna lorem ipsum.
-          ul.actions.major
-            li
-              a.button(href='#') Elevate my awareness
+          header
+            h1.title 参加概要
+        .container
+          .row
+            section(class='12u(narrower) 12u')
+              ul.default
+                li 開催日時：2017年12月11日
+                li 場所：秋葉原UDX2階 アキバ・スクエア＆4階 UDXギャラリー
+                li 配置：B-18a
+                li 頒布物
+                  ul.default
+                    li デジクリゲームアンソロジー
       // Footer
       #footer-wrapper
         #footer.container
           header.major
-            h2 Euismod aliquam vehicula lorem
+            h2 ぜひお越しください！
             p
-              | Lorem ipsum dolor sit amet consectetur et sed adipiscing elit. Curabitur vel sem sit
-              br
-              | 							dolor neque semper magna lorem ipsum feugiat veroeros lorem ipsum dolore.
+              a(href="http://digicre.net") デジクリ公式サイト
+              i.fa.fa-fighter-jet(ara-hidden=true)
+              a(href="http://digigame-expo.org/") デジゲー博公式サイト
         #copyright.container
           ul.menu
             li © Digicre. All rights reserved.
