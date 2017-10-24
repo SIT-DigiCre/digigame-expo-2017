@@ -84,6 +84,10 @@
 		color: inherit;
 		text-decoration: none;
 	}
+	h1 {
+		font-size: 2.5em;
+		line-height: 1.5em;
+	}
 
 	h2 {
 		font-size: 2em;
@@ -102,7 +106,7 @@
 		border-bottom: dotted 1px #62676c;
 
 		&:hover {
-			color: #f35858;
+			color: #0000ff;
 			border-bottom-color: rgba(255, 255, 255, 0);
 		}
 	}
@@ -179,14 +183,16 @@
 
 		> p {
 			display: block;
-			color: #f35858;
-			padding: 0.75em 0 1em 0;
-			font-size: 1.5em;
+			color: #0068ff;
+			padding: 0.75em 0 0 0;
 			line-height: 1.5em;
 		}
 
 		&.major {
 			text-align: center;
+		}
+		.title {
+			border-bottom: 1px solid black;
 		}
 	}
 
@@ -504,8 +510,8 @@
 		position: relative;
 		padding: 4em 0 2em 0;
 		background-image: url('images/header.svg');
-		@include vendor('background-image', ('url("images/overlay.png")', 'url("images/header.svg")', 'linear-gradient(75deg, #FF7088 15%, #F2B69D 55%)'));
-		background-color: #f08c89;
+		@include vendor('background-image', ('url("images/overlay.png")', 'url("images/header.svg")', 'linear-gradient(75deg, #284cff 15%, #0081f0 55%)'));
+		background-color: #0081f0;
 		background-size: 100% 620%;
 		background-size: 128px 128px, 100% 620%, auto;
 		background-repeat: repeat, no-repeat, no-repeat;
@@ -514,6 +520,20 @@
 	.homepage #header-wrapper {
 		padding: 10em 0 6em 0;
 		background-size: 128px 128px, 100% 100%, auto;
+	}
+
+	#participation {
+		position: relative;
+		@include vendor('background-image', ( 'url("images/header.svg")', 'linear-gradient(75deg, #0066ff 15%, #0089ff 55%)'));
+		background-color: #f08c89;
+		background-size: 100% 620%;
+		background-size: 200px 200px, 100% 620%, auto;
+		background-repeat: repeat, no-repeat, no-repeat;
+		h1 {
+			color: white;
+			border-bottom:1px solid white;
+		}
+		color: white;
 	}
 
 	#promo-wrapper {
@@ -533,6 +553,10 @@
 		padding: 6em 0 6em 0;
 		background-image: url('images/overlay.png'), url('images/footer.svg');
 		background-size: 128px 128px,				100% 100%;
+		i {
+			margin-right: 0.5em;
+			margin-left: 0.5em;
+		}
 	}
 
 /* Header */
@@ -718,7 +742,7 @@
 		.button {
 			background: #fff;
 			border-color: rgba(255, 255, 255, 0);
-			color: #f08c89;
+			color: #0068ff;
 			font-size: 1.25em;
 
 			&:hover {
