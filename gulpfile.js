@@ -17,7 +17,7 @@ gulp.task('pug', () => {
         }))
         .pipe(data(
             (file) => {
-                const dirname = __dirname + "/www/datas/";
+                const dirname = __dirname + "/www/data/";
                 const files = fs.readdirSync(dirname);
                 let datas = {};
                 files.forEach((name) => {
