@@ -3,9 +3,8 @@ const gulp = require("gulp");
 const plumber = require("gulp-plumber");
 const pug = require("gulp-pug");
 const data = require("gulp-data");
-const sass = require("gulp-sass");
+const sass = require("gulp-sass")(require("sass"));
 const runSequence = require("run-sequence");
-const moduleImporter = require("sass-module-importer");
 
 
 gulp.task('pug', () => {
@@ -31,24 +30,22 @@ gulp.task('pug', () => {
 })
 
 gulp.task("img", () => {
-    return gulp.src(["www/images/**/*.png", "www/images/**/*.jpg"], { base: "www/image/" })
+    return gulp.src(["www/scss/images/**/*.png", "www/scss/images/**/*.svg"], { base: "www/scss/images/", allowEmpty: true })
         .pipe(gulp.dest("dest/images/"));
 });
 
-gulp.task("css", () => {
-    return gulp.parallel(
-        () => gulp.src("www/scss/**.scss", { "base": "www/scss" })
-            .pipe(plumber({
-                errorHandler: (err) => {
-                    console.log(err);
-                }
-            }))
-            .pipe(sass({ outputStyle: 'expanded', importer: moduleImporter() }).on('error', sass.logError))
-            .pipe(gulp.dest("dest/assets/css/")),
-        () => gulp.src(["www/scss/*.css", "www/scss/images/**/*"], { "base": "www/scss" })
-            .pipe(gulp.dest("dest/assets/css/"))
-    )();
-});
+gulp.task("css", gulp.parallel(
+    () => gulp.src("www/scss/**.scss", { "base": "www/scss" })
+        .pipe(plumber({
+            errorHandler: (err) => {
+                console.log(err);
+            }
+        }))
+        .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
+        .pipe(gulp.dest("dest/assets/css/")),
+    () => gulp.src(["www/scss/*.css", "www/scss/images/**/*"], { "base": "www/scss" })
+        .pipe(gulp.dest("dest/assets/css/"))
+));
 
 gulp.task("font", () => {
     return gulp.src("www/fonts/**/*")
@@ -61,7 +58,7 @@ gulp.task("favicon", () => {
 })
 
 gulp.task("cname", () => {
-    return gulp.src("www/CNAME")
+    return gulp.src("www/CNAME", { allowEmpty: true })
         .pipe(gulp.dest("dest/"));
 })
 
@@ -77,7 +74,7 @@ gulp.task("build", gulp.series("js", "img", "pug", "css", "font", "cname", "favi
 gulp.task('watch', () => {
     gulp.watch(["www/pug/**/*.pug", "www/datas/**/*.json"], gulp.series("pug"));
     gulp.watch(["www/scss/**/*.scss"], gulp.series("css"));
-    gulp.watch(["www/img/**/*.png", "www/img/**/*.jpg"], gulp.series("img"))
+    gulp.watch(["www/scss/images/**/*.png", "www/scss/images/**/*.svg"], gulp.series("img"))
 })
 
 gulp.task('default', gulp.series("watch"));
