@@ -9,7 +9,7 @@ const moduleImporter = require("sass-module-importer");
 
 
 gulp.task('pug', () => {
-    gulp.src(["www/pug/**/*.pug","!www/pug/include/*.pug"], { base: "www/pug/" })
+    return gulp.src(["www/pug/**/*.pug", "!www/pug/include/*.pug"], { base: "www/pug/" })
         .pipe(plumber({
             errorHandler: (err) => {
                 console.log(err);
@@ -36,48 +36,48 @@ gulp.task("img", () => {
 });
 
 gulp.task("css", () => {
-    gulp.src("www/scss/**.scss", { "base": "www/scss" })
-        .pipe(plumber({
-            errorHandler: (err) => {
-                console.log(err);
-            }
-        }))
-        .pipe(sass({ outputStyle: 'expanded', importer: moduleImporter() }).on('error', sass.logError))
-        .pipe(gulp.dest("dest/assets/css/"));
-    gulp.src(["www/scss/*.css","www/scss/images/**/*"],{ "base": "www/scss" })
-        .pipe(gulp.dest("dest/assets/css/"))
+    return gulp.parallel(
+        () => gulp.src("www/scss/**.scss", { "base": "www/scss" })
+            .pipe(plumber({
+                errorHandler: (err) => {
+                    console.log(err);
+                }
+            }))
+            .pipe(sass({ outputStyle: 'expanded', importer: moduleImporter() }).on('error', sass.logError))
+            .pipe(gulp.dest("dest/assets/css/")),
+        () => gulp.src(["www/scss/*.css", "www/scss/images/**/*"], { "base": "www/scss" })
+            .pipe(gulp.dest("dest/assets/css/"))
+    )();
 });
 
-gulp.task("font",() => {
+gulp.task("font", () => {
     return gulp.src("www/fonts/**/*")
         .pipe(gulp.dest("dest/assets/fonts/"));
 });
 
-gulp.task("favicon",() => {
+gulp.task("favicon", () => {
     return gulp.src("www/favicon/*")
         .pipe(gulp.dest("dest/favicon/"));
 })
 
-gulp.task("cname",() => {
+gulp.task("cname", () => {
     return gulp.src("www/CNAME")
         .pipe(gulp.dest("dest/"));
 })
 
-gulp.task("js",() => {
+gulp.task("js", () => {
     return gulp.src("www/js/**/*")
         .pipe(gulp.dest("dest/assets/js/"))
 })
 
-gulp.task("build", ["js","img", "pug", "css","font","cname","favicon"], () => {
-
-});
+gulp.task("build", gulp.series("js", "img", "pug", "css", "font", "cname", "favicon"));
 
 
 
 gulp.task('watch', () => {
-    gulp.watch(["www/pug/**/*.pug","www/datas/**/*.json"], ["pug"]);
-    gulp.watch(["www/scss/**/*.scss"], ["css"]);
-    gulp.watch(["www/img/**/*.png", "www/img/**/*.jpg"], ["img"])
+    gulp.watch(["www/pug/**/*.pug", "www/datas/**/*.json"], gulp.series("pug"));
+    gulp.watch(["www/scss/**/*.scss"], gulp.series("css"));
+    gulp.watch(["www/img/**/*.png", "www/img/**/*.jpg"], gulp.series("img"))
 })
 
-gulp.task('default', ["watch"]);
+gulp.task('default', gulp.series("watch"));
