@@ -1,0 +1,8 @@
+{
+  "name": "digigame-expo-2017",
+  "compatibility_date": "2025-11-07",
+  "command": "npx gulp build",
+  "assets": {
+    "directory": "./dest/"
+  }
+}
