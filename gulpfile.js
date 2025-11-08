@@ -4,7 +4,6 @@ const plumber = require("gulp-plumber");
 const pug = require("gulp-pug");
 const data = require("gulp-data");
 const sass = require("gulp-sass")(require("sass"));
-const runSequence = require("run-sequence");
 
 
 gulp.task('pug', () => {
@@ -15,10 +14,10 @@ gulp.task('pug', () => {
             }
         }))
         .pipe(data(
-            (file) => {
-                const dirname = __dirname + "/www/data/";
+            () => {
+                const dirname = `${__dirname}/www/data/`;
                 const files = fs.readdirSync(dirname);
-                let datas = {};
+                const datas = {};
                 files.forEach((name) => {
                     datas[name.replace(".json", "")] = JSON.parse(fs.readFileSync(dirname + name));
                 });
